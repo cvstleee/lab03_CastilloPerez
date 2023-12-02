@@ -1,9 +1,11 @@
 package Main;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
 import Flow_21060190_CastilloPerez.Flow_21060190_CastilloPerez;
+import Menu_21060190_CastilloPerez.Menu_21060190_CastilloPerez;
 import Option_21060190_CastilloPerez.Option_21060190_CastilloPerez;
 import System_21060190_CastilloPerez.System_21060190_CastilloPerez;
 import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
@@ -29,6 +31,7 @@ public class Main {
         s1.systemAddUser("user1");
         s1.systemAddUser("uSer1");
         s1.systemLogin("usEr0");
+        //Scanner menu = new Menu_21060190_CastilloPerez(s1); y hacer un constructor en el menú
         System.out.println(s1);
         /*List <Chatbot_21060190_CastilloPerez> chatbotInicial = new ArrayList<>();
         //en video 4 min 11 muestra la carga completa
