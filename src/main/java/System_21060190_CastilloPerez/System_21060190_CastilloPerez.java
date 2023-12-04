@@ -2,6 +2,7 @@ package System_21060190_CastilloPerez;
 import java.time.LocalDate;
 import java.util.List;
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
+import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
 
 
 public class System_21060190_CastilloPerez {
@@ -10,11 +11,11 @@ public class System_21060190_CastilloPerez {
     private int InitialChatbotCodeLink;
     public List<Chatbot_21060190_CastilloPerez> chatbots;
     private String chatHistory;  //o un objeto, o todo en el mismo str
-    public List <String> users; //ver como lo hago con el tda users
+    public List <User_21060190_CastilloPerez> users;
     private String userLog;
     boolean isLog; //para recorrer lista y ver siun usuario está registrado para loguearse
 
-    public System_21060190_CastilloPerez(List<String> users, String userLog,String name, int initialChatbotCodeLink, List<Chatbot_21060190_CastilloPerez> chatbots, String chatHistory) {
+    public System_21060190_CastilloPerez(List<User_21060190_CastilloPerez> users, String userLog,String name, int initialChatbotCodeLink, List<Chatbot_21060190_CastilloPerez> chatbots, String chatHistory) {
         this.fechaActual = LocalDate.now();
         this.name = name;
         this.InitialChatbotCodeLink = initialChatbotCodeLink;
@@ -24,7 +25,7 @@ public class System_21060190_CastilloPerez {
         this.userLog = userLog;
     }
 
-    public List<String> getUsers() {
+    public List<User_21060190_CastilloPerez> getUsers() {
         return users;
     }
 
@@ -52,25 +53,28 @@ public class System_21060190_CastilloPerez {
     }
 
     //RF9
-    public void systemAddUser(String userAgregar) {
+  public void systemAddUser(User_21060190_CastilloPerez userAgregar) {
         // Convertir la entrada a minúsculas
         String userAgregarNew = userAgregar.toLowerCase();
 
         boolean existeID = false;
 
-        for (String i : users) {
-            if (userAgregarNew.equals(i)){
+        for (User_21060190_CastilloPerez i : users) {
+            //obtener usuarios ya registrados de la clase user
+            String usuarioRegistrado = i.getUserName();
+            if (userAgregarNew.equals(usuarioRegistrado)){
                 existeID = true;
                 //System.out.println("Ya existe ese usuario");
             }
         }
 
         if (!existeID) {
-            this.users.add(userAgregarNew);
+            boolean admi = userAgregar.isEsAdministrador();
+            this.users.add(userAgregarNew, admi);
             //System.out.println("Se agregó con éxito");
         }
     }
-
+/*
     //RF10
     public boolean systemLogin(String userName){
         String userNameNew = userName.toLowerCase();
@@ -85,7 +89,7 @@ public class System_21060190_CastilloPerez {
             }
         }return false;
     }
-
+*/
     //RF11
     public void systemLogout(){
         this.userLog = "";
