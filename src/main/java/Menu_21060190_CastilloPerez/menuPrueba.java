@@ -4,12 +4,13 @@ import java.util.Scanner;
 
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
 import System_21060190_CastilloPerez.System_21060190_CastilloPerez;
+import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
 
 
 public class menuPrueba {
     public static void main(String[] args) {
         //creación de un sistema vacío
-        System_21060190_CastilloPerez s1 = new System_21060190_CastilloPerez(new ArrayList<String>(),"","Sistema inicial", 1,new ArrayList<Chatbot_21060190_CastilloPerez>(),"");
+        System_21060190_CastilloPerez s1 = new System_21060190_CastilloPerez("Sistema inicial", 1,new ArrayList<Chatbot_21060190_CastilloPerez>());
 
         // Crear una instancia de Scanner para la entrada de usuario
         Scanner input = new Scanner(System.in);

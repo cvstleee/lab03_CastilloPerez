@@ -1,6 +1,7 @@
 package System_21060190_CastilloPerez;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
 import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
 
@@ -13,16 +14,14 @@ public class System_21060190_CastilloPerez {
     private String chatHistory;  //o un objeto, o todo en el mismo str
     public List <User_21060190_CastilloPerez> users;
     private String userLog;
-    boolean isLog; //para recorrer lista y ver siun usuario está registrado para loguearse
 
-    public System_21060190_CastilloPerez(List<User_21060190_CastilloPerez> users, String userLog,String name, int initialChatbotCodeLink, List<Chatbot_21060190_CastilloPerez> chatbots, String chatHistory) {
+    public System_21060190_CastilloPerez(String name, int initialChatbotCodeLink, List<Chatbot_21060190_CastilloPerez> chatbots) {
         this.fechaActual = LocalDate.now();
         this.name = name;
         this.InitialChatbotCodeLink = initialChatbotCodeLink;
         this.chatbots = chatbots;
-        this.chatHistory = chatHistory;
-        this.users = users;
-        this.userLog = userLog;
+        this.users = new ArrayList<User_21060190_CastilloPerez>();
+        this.userLog = "";
     }
 
     public List<User_21060190_CastilloPerez> getUsers() {
@@ -54,46 +53,49 @@ public class System_21060190_CastilloPerez {
 
     //RF9
   public void systemAddUser(User_21060190_CastilloPerez userAgregar) {
-        // Convertir la entrada a minúsculas
-        String userAgregarNew = userAgregar.toLowerCase();
+        boolean existeUser = false;
+        //obtengo el nombre del usuario que se desea agregar
+        String usuarioPorAgregar = userAgregar.getUserName();
 
-        boolean existeID = false;
-
+        //esta parte me está quebrando el programa aaaaa
         for (User_21060190_CastilloPerez i : users) {
             //obtener usuarios ya registrados de la clase user
             String usuarioRegistrado = i.getUserName();
-            if (userAgregarNew.equals(usuarioRegistrado)){
-                existeID = true;
+            if (usuarioPorAgregar.equals(usuarioRegistrado)){
+                existeUser = true;
                 //System.out.println("Ya existe ese usuario");
             }
         }
 
-        if (!existeID) {
-            boolean admi = userAgregar.isEsAdministrador();
-            this.users.add(userAgregarNew, admi);
+        if (!existeUser) {
+            this.users.add(userAgregar);
             //System.out.println("Se agregó con éxito");
         }
     }
-/*
+
     //RF10
     public boolean systemLogin(String userName){
+        boolean tipo = false;
         String userNameNew = userName.toLowerCase();
         String user = getUserLog();
         String userVacio = "";
         if(user.equals(userVacio)){
-            for(String i: users) {
-                if (userNameNew.equals(i)) {
+            for(User_21060190_CastilloPerez i: users) {
+                String usuarioRegistrado = i.getUserName();
+                if (userNameNew.equals(usuarioRegistrado)) {
                     this.userLog = userNameNew;
-                    return true;
+                    tipo = i.isEsAdministrador();
+                    System.out.printf("Tipo de usuario: %b\n", tipo);
                 }
             }
-        }return false;
+        } return tipo;
     }
-*/
+
     //RF11
     public void systemLogout(){
         this.userLog = "";
     }
+
 
     @Override
     public String toString() {
@@ -105,7 +107,6 @@ public class System_21060190_CastilloPerez {
                 ", chatHistory='" + chatHistory + '\'' +
                 ", users=" + users +
                 ", userLog='" + userLog + '\'' +
-                ", isLog=" + isLog +
                 '}';
     }
 }

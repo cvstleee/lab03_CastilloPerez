@@ -15,7 +15,7 @@ public class Menu_21060190_CastilloPerez {
         Scanner input = new Scanner(System.in);
         bienvenida();
         //creación sistema vacío
-        System_21060190_CastilloPerez s1 = new System_21060190_CastilloPerez(new ArrayList<User_21060190_CastilloPerez>(), "", "Sistema de Chatbots", 1, new ArrayList<Chatbot_21060190_CastilloPerez>(), "");
+        System_21060190_CastilloPerez s1 = new System_21060190_CastilloPerez("Sistema de Chatbots", 1, new ArrayList<Chatbot_21060190_CastilloPerez>());
 
         //opción de salida
         int MENU_EXIT_OPTION = 5;
@@ -26,6 +26,15 @@ public class Menu_21060190_CastilloPerez {
         int opcion3;
 
         String usuarioNuevo;
+        String usuarioNuevo2;
+
+        boolean tipo;
+
+        int code;
+        int initialFlowCodeLink;
+        int chatbotCodeLink;
+        String keyword;
+        String msg;
 
 
         do {
@@ -39,8 +48,41 @@ public class Menu_21060190_CastilloPerez {
                     System.out.println("Ingrese el nombre del usuario que desea iniciar sesión: ");
                     input.nextLine();
                     usuarioNuevo = input.nextLine();
-                    s1.systemLogin(usuarioNuevo);
-                    break;
+                    usuarioNuevo2 = usuarioNuevo.toLowerCase();
+                    //obtengo el tipo de usuario
+                    tipo = s1.systemLogin(usuarioNuevo2);
+
+                    if (tipo){
+                        do {
+                            menuAdmi();
+                            opcion3 = input.nextInt();
+
+                            switch (opcion3){
+                                case 1:
+                                    System.out.println("Ingrese la código de la opción que desea agregar: ");
+                                    code = input.nextInt();
+                                    System.out.println("Ingrese el mensaje de la opción que desea agregar: ");
+                                    msg = input.nextLine();
+                                    System.out.println("Ingrese el chatbotCodeLink de la opción que desea agregar: ");
+                                    chatbotCodeLink = input.nextInt();
+                                    System.out.println("Ingrese el initialFlowCodeLink de la opción que desea agregar: ");
+                                    initialFlowCodeLink = input.nextInt();
+                                    System.out.println("Ingrese una keyword de la opción que desea agregar: ");
+                                    input.nextLine();
+                                    keyword = input.nextLine();
+                                    //ahora como las agrego ?
+                            }
+                        }while (opcion3 != MENU_EXIT_OPTION);
+                    } //caso usuario común
+                    else{
+                        /**
+                         * Login/Logout
+                         * Interactuar con el chatbot (system-talk)
+                         * Consultar por la síntesis de un chatbot que le pertenece (system-synthesis)
+                         * Simular el diálogo entre dos chatbots del sistema (system-simulate)
+                         * */
+                    }
+
 
                 //caso de registrar un usuario, debo pasar a otro menú (menuTipoUsuario)
                 case 2:
@@ -48,22 +90,28 @@ public class Menu_21060190_CastilloPerez {
                         //llama a otro menú
                         menuTipoUsuario();
                         opcion2 = input.nextInt();
+                        //ESTO NO LO IMPRIME AAAAA
                         switch (opcion2) {
                             case 1:
                                 System.out.println("Ingrese el nombre del usuario a registrar: ");
+                                input.nextLine();
                                 usuarioNuevo = input.nextLine();
-                                User_21060190_CastilloPerez usuario1 = new User_21060190_CastilloPerez(usuarioNuevo, false);
-                                s1.systemAddUser(usuarioNuevo);
+                                User_21060190_CastilloPerez usuarioObj = new User_21060190_CastilloPerez(usuarioNuevo);
+                                usuarioObj.setEsAdministrador(false);
+                                s1.systemAddUser(usuarioObj);
                                 break;
 
 
                             case 2:
                                 System.out.println("Ingrese el nombre del usuario administrador a registrar: ");
+                                input.nextLine();
                                 usuarioNuevo = input.nextLine();
+                                usuarioNuevo2 = usuarioNuevo.toLowerCase();
                                 //creo el objeto usuario1
-                                User_21060190_CastilloPerez usuario2 = new User_21060190_CastilloPerez(usuarioNuevo, true);
+                                User_21060190_CastilloPerez usuarioObj2 = new User_21060190_CastilloPerez(usuarioNuevo2);
+                                usuarioObj2.setEsAdministrador(true);
                                 //lo agrego al sistema
-                                s1.systemAddUser(usuarioNuevo);
+                                s1.systemAddUser(usuarioObj2);
                                 break;
 
                             case 3:
@@ -76,9 +124,9 @@ public class Menu_21060190_CastilloPerez {
                             default:
                                 System.out.println("Ingrese una opción válida");
                         }
-                    }
-            }
-        }
+                    }while (opcion2 != 4);
+                }
+           } while (opcion1 != MENU_EXIT_OPTION);
     }
 
     private void printMenu() {
@@ -92,9 +140,23 @@ public class Menu_21060190_CastilloPerez {
         System.out.println("Menú de registro de usuarios\n");
         System.out.println("1. Usuario normal");
         System.out.println("2. Usuario administrador");
+        System.out.println("3. Cerrar sesión");
+        System.out.println("4. Salir del menú de tipo de usuario");
         System.out.print("\nEscoja qué acción realizar: ");
     }
 
+    //podría crear un menú para option, flow y chatbot en vez de tener todo en uno
+    private void menuAdmi(){
+        System.out.println("Menú de acciones para usuario administrador\n");
+        System.out.println("1. Crear opción");
+        System.out.println("2. Crear flujo");
+        System.out.println("3. Crear Chatbot");
+        System.out.println("4. Mostrar opciones ya creadas");
+        System.out.println("5. Mostrar flujos ya creados");
+        System.out.println("6. Mostrar Chatbots ya creados");
+        System.out.println("7. Agregar una opción a un flujo");
+        System.out.println("7. Agregar un flujo a un Chatbot");
+    }
     private void menuChatbots() {
         System.out.println("Menú de drives");
         System.out.println("1. Añadir drive");
@@ -104,51 +166,8 @@ public class Menu_21060190_CastilloPerez {
         System.out.print("\nEscoja qué acción realizar: ");
     }
 
-    private void menuArchivos() {
-        System.out.println("Menú de archivos y carpetas");
-        System.out.println("1. Cambiar ruta");
-        System.out.println("2. Ver archivos");
-        System.out.println("3. Añadir carpeta");
-        System.out.println("4. Añadir archivo");
-        System.out.println("5. Eliminar archivos o carpetas");
-        System.out.println("6. Copiar archivos o carpetas");
-        System.out.println("7. Mover archivos o carpetas");
-        System.out.println("8. Renombrar archivo");
-        System.out.println("9. Encriptar archivos");
-        System.out.println("10. Desencriptar archivos");
-        System.out.println("11. Buscar texto en archivos");
-        System.out.println("12. Salir del menú de archivos");
-
-    }
-
-    private void menuAnadirArchivo() {
-        System.out.println("Menú de añadir archivo");
-        System.out.println("1. Añadir archivo de texto");
-        System.out.println("2. Añadir archivo tipo documento");
-        System.out.println("3. Añadir archivo de código fuente");
-        System.out.println("4. Salir del menú de añadir archivo");
-    }
-
-    private void menuPapelera() {
-        System.out.println("Menú de papelera");
-        System.out.println("1. Ver papelera");
-        System.out.println("2. Restaurar de la papelera");
-        System.out.println("3. Salir del menú de papelera");
-    }
-
-    private void parametrosDir() {
-        System.out.println("Los parámetros disponibles para usar en Dir son: ");
-        System.out.println("'/a' muestra los elementos ocultos");
-        System.out.println("'/s' muestra los subdirectorios");
-        System.out.println("'/o N' ordena los archivos ordenados alfabéticamente de manera ascendente");
-        System.out.println("'/o -N' ordena los archivos ordenados alfabéticamente de manera ascendente");
-        System.out.println("'/o D' ordena los archivos ordenados por fecha de creación de manera ascendente");
-        System.out.println("'/o -D' ordena los archivos ordenados por fecha de creación de manera ascendente");
-
-    }
     private void bienvenida() {
         System.out.println("Bienvenido al sistema de chatbots");
     }
-
 
 }
