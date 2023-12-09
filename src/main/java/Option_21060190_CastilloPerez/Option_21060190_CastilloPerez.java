@@ -31,6 +31,16 @@ public class Option_21060190_CastilloPerez implements OptionInterface_21060190_C
         return code;
     }
 
+    public int getChatbotCodeLink() {
+        return chatbotCodeLink;
+    }
+
+    public int getInitialFlowCodeLink() {
+        return initialFlowCodeLink;
+    }
+
+
+
     @Override
     public String toString() {
         return "Option_21060190_CastilloPerez{" +

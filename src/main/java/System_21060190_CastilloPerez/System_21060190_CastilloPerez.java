@@ -2,6 +2,7 @@ package System_21060190_CastilloPerez;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
 import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
 
@@ -30,6 +31,14 @@ public class System_21060190_CastilloPerez {
 
     public String getUserLog() {
         return userLog;
+    }
+
+    public int getInitialChatbotCodeLink() {
+        return InitialChatbotCodeLink;
+    }
+
+    public List<Chatbot_21060190_CastilloPerez> getChatbots() {
+        return chatbots;
     }
 
     //RF8
@@ -94,6 +103,24 @@ public class System_21060190_CastilloPerez {
     //RF11
     public void systemLogout(){
         this.userLog = "";
+    }
+
+
+    //función para interactuar entre chatbots
+    //el msj sería el que indica a que chatbot se mueve, lo cual es la id de un option
+    public void systemTalk (String mensaje){
+        //lista de chatbots que ya están en el sistema
+        List<Chatbot_21060190_CastilloPerez> chatbotRegistrado = getChatbots();
+        //obtener la id del primer chatbot o chatbot inicial
+        int chatbotInicialId = getInitialChatbotCodeLink();
+        //que imprima el chatbot que tiene esa ID?
+        for (Chatbot_21060190_CastilloPerez i: chatbots){
+            int IdChatbot = i.getChatbotID();
+            if(IdChatbot == chatbotInicialId){
+                System.out.println(i); //me imprimiría el chatbot que cumple con eso, pero no lo necesito siempre...
+            }
+        }
+
     }
 
 

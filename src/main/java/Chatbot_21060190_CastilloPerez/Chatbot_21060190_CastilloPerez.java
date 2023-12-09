@@ -23,6 +23,9 @@ public class Chatbot_21060190_CastilloPerez {
         return chatbotID;
     }
 
+    public int getStartFlowID() {
+        return startFlowID;
+    }
 
     //RF5
     public void chatbotAddFlow(Flow_21060190_CastilloPerez flowAgregar) {

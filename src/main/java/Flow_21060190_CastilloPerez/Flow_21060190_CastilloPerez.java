@@ -7,7 +7,7 @@ public class Flow_21060190_CastilloPerez implements FlowInterface_21060190_Casti
     private String nameMsg;
     public List<Option_21060190_CastilloPerez> option;
 
-    //RF2: constructor, con herencia
+    //RF2: constructor
     public Flow_21060190_CastilloPerez(int ID, String nameMsg, List<Option_21060190_CastilloPerez> option){
         this.ID = ID;
         this.nameMsg = nameMsg;
@@ -16,6 +16,10 @@ public class Flow_21060190_CastilloPerez implements FlowInterface_21060190_Casti
 
     public int getID() {
         return ID;
+    }
+
+    public String getNameMsg() {
+        return nameMsg;
     }
 
     //get del option
