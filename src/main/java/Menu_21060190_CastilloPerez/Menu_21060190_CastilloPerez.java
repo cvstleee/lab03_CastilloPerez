@@ -3,7 +3,10 @@ import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Flow;
+
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
+import Flow_21060190_CastilloPerez.Flow_21060190_CastilloPerez;
 import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
 import System_21060190_CastilloPerez.System_21060190_CastilloPerez;
 
@@ -17,6 +20,8 @@ public class Menu_21060190_CastilloPerez {
         //creación sistema vacío
         System_21060190_CastilloPerez s1 = new System_21060190_CastilloPerez("Sistema de Chatbots", 1, new ArrayList<Chatbot_21060190_CastilloPerez>());
 
+        //system con datos
+        System_21060190_CastilloPerez s2 = CargaDatos.cargaDatos();
         //opción de salida
         int MENU_EXIT_OPTION = 5;
 
@@ -36,6 +41,8 @@ public class Menu_21060190_CastilloPerez {
         String keyword;
         String msg;
 
+        String idOP;
+
 
         do {
             printMenu();
@@ -50,7 +57,8 @@ public class Menu_21060190_CastilloPerez {
                     usuarioNuevo = input.nextLine();
                     usuarioNuevo2 = usuarioNuevo.toLowerCase();
                     //obtengo el tipo de usuario
-                    tipo = s1.systemLogin(usuarioNuevo2);
+                    tipo = s2.systemLogin(usuarioNuevo2);
+                    System.out.printf("Bienvenido/a %s\n", usuarioNuevo2);
 
                     if (tipo){
                         do {
@@ -75,6 +83,25 @@ public class Menu_21060190_CastilloPerez {
                         }while (opcion3 != MENU_EXIT_OPTION);
                     } //caso usuario común
                     else{
+                        Chatbot_21060190_CastilloPerez chatbotAux = s2.obtenerChatbot(0,s2);
+                        System.out.println(chatbotAux.getName());
+                        System.out.println(chatbotAux.getWelcomeMessage());
+                        Flow_21060190_CastilloPerez flowAux = chatbotAux.obtenerFlow(chatbotAux.getStartFlowID(), chatbotAux);
+                        System.out.println(flowAux.getNameMsg());
+                        //menú inicial
+                        flowAux.printOptions(flowAux);
+                        System.out.println("Escriba el n° de la opción que desea: ");
+
+                        //pq el int tiene que entrar como string al systemTalk
+                        input.nextLine();
+                        idOP = input.nextLine();
+
+                        //quiero que el systemTalk solo haga interacciones
+                        s2.systemTalk(idOP);
+
+
+
+
                         /**
                          * Login/Logout
                          * Interactuar con el chatbot (system-talk)
@@ -156,14 +183,6 @@ public class Menu_21060190_CastilloPerez {
         System.out.println("6. Mostrar Chatbots ya creados");
         System.out.println("7. Agregar una opción a un flujo");
         System.out.println("7. Agregar un flujo a un Chatbot");
-    }
-    private void menuChatbots() {
-        System.out.println("Menú de drives");
-        System.out.println("1. Añadir drive");
-        System.out.println("2. Seleccionar drive");
-        System.out.println("3. Formatear drive");
-        System.out.println("4. Salir del menú de drives");
-        System.out.print("\nEscoja qué acción realizar: ");
     }
 
     private void bienvenida() {

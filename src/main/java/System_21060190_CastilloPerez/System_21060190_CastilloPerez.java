@@ -41,6 +41,17 @@ public class System_21060190_CastilloPerez {
         return chatbots;
     }
 
+    //función que me obtiene cierto chatbot del sistema, según su id, para así imprimirlo en el menú
+    public Chatbot_21060190_CastilloPerez obtenerChatbot(int id, System_21060190_CastilloPerez sys){
+        //obtengo todos los chatbots del sistema
+        List<Chatbot_21060190_CastilloPerez> chatbots = sys.getChatbots();
+        for(Chatbot_21060190_CastilloPerez i: chatbots){
+            int idObtenido = i.getChatbotID();
+            if(idObtenido == id){
+                return i;
+            }
+        }return null;
+    }
     //RF8
     public void systemAddChatbot(Chatbot_21060190_CastilloPerez chatbotAgregar){
         int code = chatbotAgregar.getChatbotID();
@@ -106,22 +117,23 @@ public class System_21060190_CastilloPerez {
     }
 
 
-    //función para interactuar entre chatbots
-    //el msj sería el que indica a que chatbot se mueve, lo cual es la id de un option
+    //mensaje puede ser int o string, si es int hay que pasarlo a int en la función
     public void systemTalk (String mensaje){
-        //lista de chatbots que ya están en el sistema
-        List<Chatbot_21060190_CastilloPerez> chatbotRegistrado = getChatbots();
-        //obtener la id del primer chatbot o chatbot inicial
-        int chatbotInicialId = getInitialChatbotCodeLink();
-        //que imprima el chatbot que tiene esa ID?
-        for (Chatbot_21060190_CastilloPerez i: chatbots){
-            int IdChatbot = i.getChatbotID();
-            if(IdChatbot == chatbotInicialId){
-                System.out.println(i); //me imprimiría el chatbot que cumple con eso, pero no lo necesito siempre...
-            }
+        if(esNumero(mensaje)){
+          //necesito chatbotcode link para igualarlo al id de algún chatbot
         }
-
     }
+
+    //función que me confirma si un str es número o no, es para el systemTalk
+
+    public static boolean esNumero(String cadenaCaracteres){
+        for(char caracter : cadenaCaracteres.toCharArray()){
+            if(Character.isDigit(caracter)){
+                return true;
+            }
+        }return false;
+    }
+
 
 
     @Override

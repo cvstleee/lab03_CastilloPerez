@@ -47,6 +47,11 @@ public class Flow_21060190_CastilloPerez implements FlowInterface_21060190_Casti
     }
 
 
+    public void printOptions(Flow_21060190_CastilloPerez flow) {
+        for (Option_21060190_CastilloPerez opt : flow.getOption()) {
+            System.out.println(opt.getMessage());
+        }
+    }
     @Override
     public String toString() {
         return "flow_21060190_CastilloPerez{" +

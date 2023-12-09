@@ -39,7 +39,9 @@ public class Option_21060190_CastilloPerez implements OptionInterface_21060190_C
         return initialFlowCodeLink;
     }
 
-
+    public String getMessage() {
+        return message;
+    }
 
     @Override
     public String toString() {

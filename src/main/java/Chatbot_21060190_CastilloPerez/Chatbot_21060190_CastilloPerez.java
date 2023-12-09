@@ -1,5 +1,7 @@
 package Chatbot_21060190_CastilloPerez;
 import java.util.List;
+import java.util.concurrent.Flow;
+
 import Flow_21060190_CastilloPerez.Flow_21060190_CastilloPerez;
 import Option_21060190_CastilloPerez.Option_21060190_CastilloPerez;
 
@@ -25,6 +27,29 @@ public class Chatbot_21060190_CastilloPerez {
 
     public int getStartFlowID() {
         return startFlowID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getWelcomeMessage() {
+        return welcomeMessage;
+    }
+
+    public List<Flow_21060190_CastilloPerez> getFlows() {
+        return flows;
+    }
+
+    public Flow_21060190_CastilloPerez obtenerFlow(int id, Chatbot_21060190_CastilloPerez chatbot){
+        //obtengo todos los flows de ese chatbot en la 2da entrada
+        List<Flow_21060190_CastilloPerez> flowsChatbot = chatbot.getFlows();
+        for(Flow_21060190_CastilloPerez i: flowsChatbot){
+            int idObtenido = i.getID();
+            if(idObtenido == id){
+                return i;
+            }
+        }return null;
     }
 
     //RF5

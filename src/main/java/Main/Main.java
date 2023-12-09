@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
 import Flow_21060190_CastilloPerez.Flow_21060190_CastilloPerez;
 import Menu_21060190_CastilloPerez.Menu_21060190_CastilloPerez;
+import Menu_21060190_CastilloPerez.CargaDatos;
 import Option_21060190_CastilloPerez.Option_21060190_CastilloPerez;
 import System_21060190_CastilloPerez.System_21060190_CastilloPerez;
 import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
@@ -13,6 +14,7 @@ import Menu_21060190_CastilloPerez.Menu_21060190_CastilloPerez;
 
 public class Main {
     public static void main(String[] args){
+        CargaDatos.cargaDatos();
         //carga datos
        /* Option_21060190_CastilloPerez op1 = new Option_21060190_CastilloPerez(1, "Mensaje", 2, 3, new ArrayList<String>());
         Option_21060190_CastilloPerez op2 = new Option_21060190_CastilloPerez(2,"Opción 2",3,5,new ArrayList<String>());
@@ -48,6 +50,13 @@ public class Main {
         Menu_21060190_CastilloPerez menu = new Menu_21060190_CastilloPerez();
         menu.start();
 
+        /*String prueba = "aaaaa";
+
+        boolean ojo = false;
+
+        ojo = System_21060190_CastilloPerez.esNumero(prueba);
+
+        System.out.println(ojo); */
 
         /*List <Chatbot_21060190_CastilloPerez> chatbotInicial = new ArrayList<>();
         //en video 4 min 11 muestra la carga completa
