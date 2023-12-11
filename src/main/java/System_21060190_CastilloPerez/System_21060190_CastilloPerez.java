@@ -132,28 +132,29 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
 
     /**
      * Agrega un usuario al sistema
+     *
      * @param userAgregar usuario que se quiere agregar
+     * @return true si ya existe en el sistema y false si no y lo agrega
      */
-  public void systemAddUser(User_21060190_CastilloPerez userAgregar) {
-        boolean existeUser = false;
-        //obtengo el nombre del usuario que se desea agregar
-        String usuarioPorAgregar = userAgregar.getUserName();
+  public boolean systemAddUser(User_21060190_CastilloPerez userAgregar) {
+      boolean existeUser = false;
+      //obtengo el nombre del usuario que se desea agregar
+      String usuarioPorAgregar = userAgregar.getUserName();
+      for (User_21060190_CastilloPerez i : users) {
+          //obtener usuarios ya registrados de la clase user
+          String usuarioRegistrado = i.getUserName();
+          if (usuarioPorAgregar.equals(usuarioRegistrado)) {
+              existeUser = true;
+              return existeUser;
+              //System.out.println("Ya existe ese usuario en el sistema, intente con otro nombre\n");
+          }
+      }
 
-        //esta parte me está quebrando el programa aaaaa
-        for (User_21060190_CastilloPerez i : users) {
-            //obtener usuarios ya registrados de la clase user
-            String usuarioRegistrado = i.getUserName();
-            if (usuarioPorAgregar.equals(usuarioRegistrado)){
-                existeUser = true;
-                //System.out.println("Ya existe ese usuario");
-            }
-        }
-
-        if (!existeUser) {
-            this.users.add(userAgregar);
-            //System.out.println("Se agregó con éxito");
-        }
-    }
+      if (!existeUser) {
+          this.users.add(userAgregar);
+          //System.out.println("Se agrego con exito al sistema\n");
+      }return existeUser;
+  }
 
 
     /**
@@ -182,7 +183,6 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
     /**
      * Cierra la sesión del usuario
      */
-    //RF11
     public void systemLogout(){
         this.userLog = "";
     }

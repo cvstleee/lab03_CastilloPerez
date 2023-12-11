@@ -1,6 +1,4 @@
 package Menu_21060190_CastilloPerez;
-import java.awt.image.AreaAveragingScaleFilter;
-import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,8 +16,6 @@ public class Menu_21060190_CastilloPerez {
     public void start() {
         Scanner input = new Scanner(System.in);
         bienvenida();
-        //creación sistema vacío
-        System_21060190_CastilloPerez s1 = new System_21060190_CastilloPerez("Sistema de Chatbots", 1, new ArrayList<Chatbot_21060190_CastilloPerez>());
 
         //system con datos
         System_21060190_CastilloPerez s2 = CargaDatos.cargaDatos();
@@ -42,12 +38,12 @@ public class Menu_21060190_CastilloPerez {
         String userLogueado;
         String idOP;
 
-        //flow stuff
+        //flow
 
         int flowId;
         String nameMsgFlow;
 
-        //option stuff
+        //option
         int codeOption;
         String messageOption;
         int chatbotCodeLink;
@@ -55,16 +51,19 @@ public class Menu_21060190_CastilloPerez {
         ArrayList<String> keywords = new ArrayList<>();
 
 
-        //chatbot stuff
+        //chatbot
         int chatbotID;
         String nameChatbot;
         String welcomeMessageChatbot;
         int startFlowID;
         List<Flow_21060190_CastilloPerez> flows;
 
-        Chatbot_21060190_CastilloPerez c4 = new Chatbot_21060190_CastilloPerez(0,"Chatbot vacio",null,0,new ArrayList<Flow_21060190_CastilloPerez>());
-        Flow_21060190_CastilloPerez f4 = new Flow_21060190_CastilloPerez(0,"flow vacio",new ArrayList<Option_21060190_CastilloPerez>());
-        Option_21060190_CastilloPerez op100 = new Option_21060190_CastilloPerez(0,"option vacio",0,0, keywords);
+        Chatbot_21060190_CastilloPerez c4 = new Chatbot_21060190_CastilloPerez(10,"Chatbot vacio",null,0,new ArrayList<Flow_21060190_CastilloPerez>());
+        Chatbot_21060190_CastilloPerez c5 = new Chatbot_21060190_CastilloPerez(11,"Chatbot vacio 2",null,0,new ArrayList<Flow_21060190_CastilloPerez>());
+        Flow_21060190_CastilloPerez f4 = new Flow_21060190_CastilloPerez(10,"flow vacio",new ArrayList<Option_21060190_CastilloPerez>());
+        Flow_21060190_CastilloPerez f5 = new Flow_21060190_CastilloPerez(11,"flow vacio 2",new ArrayList<Option_21060190_CastilloPerez>());
+        Option_21060190_CastilloPerez op100 = new Option_21060190_CastilloPerez(10,"option vacio",10,11, keywords);
+        Option_21060190_CastilloPerez op200 = new Option_21060190_CastilloPerez(11,"option vacio 2",11,10, keywords);
 
         do {
             printMenu();
@@ -99,7 +98,7 @@ public class Menu_21060190_CastilloPerez {
 
                                             switch (opcion4){
                                                 case 1:
-                                                    System.out.println("Para crear un chatbot ingrese los datos en el orden que se le indica\n");
+                                                    System.out.println("Para crear el chatbot 1 ingrese los datos en el orden que se le indica\n");
                                                     System.out.println("Ingrese el nombre del chatbot: ");
                                                     input.nextLine();
                                                     nameChatbot = input.nextLine();
@@ -114,17 +113,41 @@ public class Menu_21060190_CastilloPerez {
                                                     System.out.println("Ingrese el startFlowId del chatbot: ");
                                                     startFlowID = input.nextInt();
                                                     c4.setStartFlowID(startFlowID);
-                                                    c4.chatbotAddFlow(f4);
                                                     System.out.println("Chatbot creado: " + c4);
                                                     break;
 
                                                 case 2:
-                                                    System.out.println("En esta opcion se agrega el chatbot anteriormente creado al sistema con datos prehechos\n");
+                                                    System.out.println("En esta opcion se agrega el chatbot 1 anteriormente creado al sistema con datos prehechos\n");
                                                     s2.systemAddChatbot(c4);
                                                     System.out.println("Sistema actual + el chatbot creado recientemente: " + s2);
                                                     break;
+
+                                                case 3:
+                                                    System.out.println("Para crear el chatbot 2 ingrese los datos en el orden que se le indica\n");
+                                                    System.out.println("Ingrese el nombre del chatbot: ");
+                                                    input.nextLine();
+                                                    nameChatbot = input.nextLine();
+                                                    c5.setName(nameChatbot);
+                                                    System.out.println("Ingrese la ID del chatbot: ");
+                                                    chatbotID = input.nextInt();
+                                                    c5.setChatbotID(chatbotID);
+                                                    System.out.println("Ingrese el welcomeMsg del chatbot: ");
+                                                    input.nextLine();
+                                                    welcomeMessageChatbot = input.nextLine();
+                                                    c5.setWelcomeMessage(welcomeMessageChatbot);
+                                                    System.out.println("Ingrese el startFlowId del chatbot: ");
+                                                    startFlowID = input.nextInt();
+                                                    c5.setStartFlowID(startFlowID);
+                                                    System.out.println("Chatbot creado: " + c5);
+                                                    break;
+
+                                                case 4:
+                                                    System.out.println("En esta opcion se agrega el chatbot 2 anteriormente creado al sistema con datos prehechos\n");
+                                                    s2.systemAddChatbot(c5);
+                                                    System.out.println("Sistema actual + el chatbot creado recientemente: " + s2);
+                                                    break;
                                             }
-                                        }while (opcion4 != 3); //con esto vuelve al inicial
+                                        }while (opcion4 != 5); //con esto vuelve al inicial
 
                                     case 2:
                                         //flows, otro menú
@@ -133,7 +156,7 @@ public class Menu_21060190_CastilloPerez {
                                             opcion5 = input.nextInt();
                                             switch (opcion5){
                                                 case 1:
-                                                    System.out.println("Para crear un flow ingrese los datos en el orden que se le indica\n");
+                                                    System.out.println("Para crear el flow 1 ingrese los datos en el orden que se le indica\n");
                                                     System.out.println("Ingrese el nombre del flow: ");
                                                     input.nextLine();
                                                     nameMsgFlow = input.nextLine();
@@ -141,17 +164,47 @@ public class Menu_21060190_CastilloPerez {
                                                     System.out.println("Ingrese la ID del flow: ");
                                                     flowId = input.nextInt();
                                                     f4.setID(flowId);
-                                                    f4.flowAddOption(op100);
                                                     System.out.println("Flow creado: " + f4);
                                                     break;
 
                                                 case 2:
+                                                    System.out.println("Para crear el flow 2 ingrese los datos en el orden que se le indica\n");
+                                                    System.out.println("Ingrese el nombre del flow: ");
+                                                    input.nextLine();
+                                                    nameMsgFlow = input.nextLine();
+                                                    f5.setNameMsg(nameMsgFlow);
+                                                    System.out.println("Ingrese la ID del flow: ");
+                                                    flowId = input.nextInt();
+                                                    f5.setID(flowId);
+                                                    System.out.println("Flow creado: " + f5);
+                                                    break;
+
+                                                case 3:
                                                     c4.chatbotAddFlow(f4);
-                                                    System.out.println("En esta opcion se agrega el flow anteriormente creado al chatbot creado por usted anteriormente\n");
+                                                    System.out.println("En esta opcion se agrega el flow 1 al chatbot 1 creado por usted anteriormente\n");
                                                     System.out.println("Chatbot + flow creado recientemente: " + c4);
                                                     break;
+
+                                                case 4:
+                                                    c5.chatbotAddFlow(f4);
+                                                    System.out.println("En esta opcion se agrega el flow 1 al chatbot 2 creado por usted anteriormente\n");
+                                                    System.out.println("Chatbot + flow creado recientemente: " + c5);
+                                                    break;
+
+                                                case 5:
+                                                    c4.chatbotAddFlow(f5);
+                                                    System.out.println("En esta opcion se agrega el flow 2 al chatbot 1 creado por usted anteriormente\n");
+                                                    System.out.println("Chatbot + flow creado recientemente: " + c4);
+                                                    break;
+
+                                                case 6:
+                                                    c5.chatbotAddFlow(f5);
+                                                    System.out.println("En esta opcion se agrega el flow 2 al chatbot 2 creado por usted anteriormente\n");
+                                                    System.out.println("Chatbot + flow creado recientemente: " + c5);
+                                                    break;
+
                                             }
-                                        }while(opcion5 != 3);
+                                        }while(opcion5 != 7);
 
 
                                     case 3:
@@ -161,7 +214,7 @@ public class Menu_21060190_CastilloPerez {
                                             opcion6 = input.nextInt();
                                             switch (opcion6){
                                                 case 1:
-                                                    System.out.println("Para crear un option ingrese los datos en el orden que se le indica\n");
+                                                    System.out.println("Para crear el option 1 ingrese los datos en el orden que se le indica\n");
                                                     System.out.println("Ingrese el mensaje del option: ");
                                                     input.nextLine();
                                                     messageOption = input.nextLine();
@@ -191,12 +244,60 @@ public class Menu_21060190_CastilloPerez {
                                                     break;
 
                                                 case 2:
-                                                    System.out.println("En esta opcion se agrega el option anteriormente creado al flow por usted anteriormente\n");
+                                                    System.out.println("En esta opcion se agrega el option 1 al flow 1 creado por usted anteriormente\n");
                                                     f4.flowAddOption(op100);
                                                     System.out.println("Flow + option creado recientemente: " + f4);
                                                     break;
+
+                                                case 3:
+                                                    System.out.println("En esta opcion se agrega el option 1 al flow 2 creado por usted anteriormente\n");
+                                                    f5.flowAddOption(op100);
+                                                    System.out.println("Flow + option creado recientemente: " + f5);
+                                                    break;
+
+                                                case 4:
+                                                    System.out.println("Para crear el option 2 ingrese los datos en el orden que se le indica\n");
+                                                    System.out.println("Ingrese el mensaje del option: ");
+                                                    input.nextLine();
+                                                    messageOption = input.nextLine();
+                                                    op200.setMessage(messageOption);
+                                                    System.out.println("Ingrese la ID del option: ");
+                                                    codeOption = input.nextInt();
+                                                    op200.setCode(codeOption);
+                                                    System.out.println("Ingrese el chatbotCodeLink del option: ");
+                                                    chatbotCodeLink = input.nextInt();
+                                                    op200.setChatbotCodeLink(chatbotCodeLink);
+                                                    System.out.println("Ingrese el initialFlowCodeLink del option: ");
+                                                    initialFlowCodeLink = input.nextInt();
+                                                    op200.setInitialFlowCodeLink(initialFlowCodeLink);
+                                                    System.out.println("¿Cuantos keyword desea ingresar?: ");
+
+                                                    int cantidadKey2 = input.nextInt();
+                                                    input.nextLine();
+                                                    int j = 1;
+                                                    while(j <= cantidadKey2){
+                                                        System.out.printf("Ingrese el keyword %d del option: ", j);
+                                                        String keyword = input.nextLine();
+                                                        op200.agregarKeyword(keyword);
+                                                        j++;
+                                                    }
+
+                                                    System.out.println("Option creado: " + op200);
+                                                    break;
+
+                                                case 5:
+                                                    System.out.println("En esta opcion se agrega el option 2 anteriormente creado al flow 1\n");
+                                                    f4.flowAddOption(op200);
+                                                    System.out.println("Flow + option creado recientemente: " + f4);
+                                                    break;
+
+                                                case 6:
+                                                    System.out.println("En esta opcion se agrega el option 2 anteriormente creado al flow 2\n");
+                                                    f5.flowAddOption(op200);
+                                                    System.out.println("Flow + option creado recientemente: " + f5);
+                                                    break;
                                             }
-                                        }while(opcion6 != 3);
+                                        }while(opcion6 != 7);
                                 }
                             }while (opcion3 != MENU_EXIT_OPTION);
                         }
@@ -209,12 +310,9 @@ public class Menu_21060190_CastilloPerez {
                             //menú inicial
                             flowAux.printOptions(flowAux);
                             System.out.println("Escriba el n° de la opción que desea: ");
-
-                            //pq el int tiene que entrar como string al systemTalk
                             input.nextLine();
                             idOP = input.nextLine();
 
-                            //quiero que el systemTalk solo haga interacciones
                             s2.systemTalk(idOP);
 
                             /**
@@ -230,13 +328,10 @@ public class Menu_21060190_CastilloPerez {
                     }
 
 
-                //caso de registrar un usuario, debo pasar a otro menú (menuTipoUsuario)
                 case 2:
                     do {
-                        //llama a otro menú
                         menuTipoUsuario();
                         opcion2 = input.nextInt();
-                        //ESTO NO LO IMPRIME AAAAA
                         switch (opcion2) {
                             case 1:
                                 System.out.println("Ingrese el nombre del usuario a registrar: ");
@@ -244,7 +339,12 @@ public class Menu_21060190_CastilloPerez {
                                 usuarioNuevo = input.nextLine();
                                 User_21060190_CastilloPerez usuarioObj = new User_21060190_CastilloPerez(usuarioNuevo);
                                 usuarioObj.setEsAdministrador(false);
-                                s1.systemAddUser(usuarioObj);
+                                boolean seAgregoUser = s2.systemAddUser(usuarioObj);
+                                if(!seAgregoUser){
+                                    System.out.printf("Se agrego al usuario %s con exito\n", usuarioObj);
+                                }else{
+                                    System.out.println("El usuario ya existe en el sistema, intente con otro nombre\n");
+                                }
                                 break;
 
 
@@ -257,7 +357,12 @@ public class Menu_21060190_CastilloPerez {
                                 User_21060190_CastilloPerez usuarioObj2 = new User_21060190_CastilloPerez(usuarioNuevo2);
                                 usuarioObj2.setEsAdministrador(true);
                                 //lo agrego al sistema
-                                s1.systemAddUser(usuarioObj2);
+                                boolean seAgregoUser2 = s2.systemAddUser(usuarioObj2);
+                                if(!seAgregoUser2){
+                                    System.out.printf("Se agrego al usuario %s con exito\n", usuarioObj2);
+                                }else{
+                                    System.out.println("El usuario ya existe en el sistema, intente con otro nombre\n");
+                                }
                                 break;
 
                             case 3:
@@ -268,7 +373,7 @@ public class Menu_21060190_CastilloPerez {
                         }
                     }while (opcion2 != 3);
                 case 3:
-                    s1.systemLogout();
+                    s2.systemLogout();
                     if (s2.getUserLog().equals("")){
                         System.out.println("Ha cerrado sesión exitosamente");
                     }
@@ -294,7 +399,6 @@ public class Menu_21060190_CastilloPerez {
         System.out.print("\nEscoja qué acción realizar: ");
     }
 
-    //podría crear un menú para option, flow y chatbot en vez de tener todo en uno
     private void menuAdmi(){
         System.out.println("Menú de acciones para usuario administrador por objeto\n");
         System.out.println("1. Chatbot");
@@ -306,24 +410,34 @@ public class Menu_21060190_CastilloPerez {
 
     private void menuChatbot(){
         System.out.println("Menu chatbot\n");
-        System.out.println("1. Crear un chatbot");
-        System.out.println("2. Agregar un chatbot al sistema");
-        System.out.println("3. Volver al menú de acciones");
+        System.out.println("1. Crear chatbot 1");
+        System.out.println("2. Agregar chatbot 1 al sistema");
+        System.out.println("3. Crear chatbot 2");
+        System.out.println("4. Agregar chatbot 2 al sistema");
+        System.out.println("5. Volver al menú de acciones");
         System.out.println("\nEscoja qué acción a realizar: ");
     }
     private void menuFlow(){
         System.out.println("Menu flow\n");
-        System.out.println("1. Crear un flow");
-        System.out.println("2. Agregar un flow a un chatbot");
-        System.out.println("3. Volver al menú de acciones");
+        System.out.println("1. Crear flow 1");
+        System.out.println("2. Crear flow 2");
+        System.out.println("3. Agregar flow 1 a chatbot 1");
+        System.out.println("4. Agregar flow 1 a chatbot 2");
+        System.out.println("5. Agregar flow 2 a chatbot 1");
+        System.out.println("6. Agregar flow 2 a chatbot 2");
+        System.out.println("7. Volver al menú de acciones");
         System.out.println("\nEscoja qué acción a realizar: ");
     }
 
     private void menuOption(){
         System.out.println("Menu option\n");
-        System.out.println("1. Crear un option");
-        System.out.println("2. Agregar un option a un flow");
-        System.out.println("3. Volver al menú de acciones");
+        System.out.println("1. Crear option 1");
+        System.out.println("2. Agregar option 1 a flow 1");
+        System.out.println("3. Agregar option 1 a flow 2");
+        System.out.println("4. Crear option 2");
+        System.out.println("5. Agregar option 2 a flow 1");
+        System.out.println("6. Agregar option 2 a flow 2");
+        System.out.println("7. Volver al menú de acciones");
         System.out.println("\nEscoja qué acción a realizar: ");
     }
 

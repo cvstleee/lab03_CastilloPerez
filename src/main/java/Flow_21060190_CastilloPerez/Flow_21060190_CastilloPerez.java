@@ -23,7 +23,6 @@ public class Flow_21060190_CastilloPerez implements FlowInterface_21060190_Casti
      * @param nameMsg nombre del flow
      * @param option lista de options del flow
      */
-    //RF2: constructor
     public Flow_21060190_CastilloPerez(int ID, String nameMsg, List<Option_21060190_CastilloPerez> option){
         this.ID = ID;
         this.nameMsg = nameMsg;

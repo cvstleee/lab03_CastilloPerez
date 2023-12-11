@@ -21,9 +21,11 @@ public interface SystemInterface_21060190_CastilloPerez {
 
     /**
      * Agrega un usuario al sistema
+     *
      * @param userAgregar usuario que se quiere agregar
+     * @return
      */
-    void systemAddUser(User_21060190_CastilloPerez userAgregar);
+    boolean systemAddUser(User_21060190_CastilloPerez userAgregar);
 
     /**
      * Hace que un usuario inicie sesión

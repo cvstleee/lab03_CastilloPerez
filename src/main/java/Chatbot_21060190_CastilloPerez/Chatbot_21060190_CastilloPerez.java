@@ -116,13 +116,6 @@ public class Chatbot_21060190_CastilloPerez implements ChatbotInterface_21060190
         this.startFlowID = startFlowID;
     }
 
-    /**
-     * Cambia el startFlowID del chatbot
-     * @param startFlowID
-     */
-    public void setFlows(List<Flow_21060190_CastilloPerez> flows) {
-        this.flows = flows;
-    }
 
     /**
      * Obtiene el flow de cierto chatbot que coincida con una ID
