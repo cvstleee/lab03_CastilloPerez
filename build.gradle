@@ -1,12 +1,17 @@
-plugins {
-    id 'java'
+plugins{
+    id 'application'
 }
 
-group = 'org.example'
+
+group = 'Main'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+run {
+    standardInput = System.in
 }
 
 dependencies {
@@ -14,6 +19,12 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+application {
+    mainClass = 'Main.Main'
+}
+
+
 test {
     useJUnitPlatform()
 }
+
