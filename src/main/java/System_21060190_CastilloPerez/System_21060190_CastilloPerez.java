@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import Chatbot_21060190_CastilloPerez.Chatbot_21060190_CastilloPerez;
+import Flow_21060190_CastilloPerez.Flow_21060190_CastilloPerez;
+import Option_21060190_CastilloPerez.Option_21060190_CastilloPerez;
 import User_21060190_CastilloPerez.User_21060190_CastilloPerez;
 
 
@@ -26,7 +28,7 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
     /**
      * historial de la interacción de un usuario
      */
-    private String chatHistory;
+    private StringBuilder chatHistory;
     /**
      * lista de usuarios dentro de un sistema
      */
@@ -35,6 +37,25 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
      * usuario con la sesión iniciada
      */
     private String userLog;
+
+
+    /**
+     * id del chatbot actual del sistema
+     */
+    private int chatbotActual;
+    /**
+     * id del flow actual del sistema
+     */
+    private int flowActual;
+
+    /**
+     * id del chatbot anterior
+     */
+    private int chatbotAnterior;
+    /**
+     * id del flow anterior
+     */
+    private int flowAnterior;
 
     /**
      * Instancia/constructor de un sistema
@@ -49,6 +70,9 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
         this.chatbots = chatbots;
         this.users = new ArrayList<User_21060190_CastilloPerez>();
         this.userLog = "";
+        this.chatbotActual = 0;
+        this.flowActual = 0;
+        this.chatHistory = new StringBuilder();
     }
 
     /**
@@ -92,14 +116,53 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
     }
 
     /**
+     * Obtiene el chatHistory del sistema
+     * @return chatHistory
+     */
+    public StringBuilder getChatHistory() {
+        return chatHistory;
+    }
+
+    /**
+     * Obtiene el id del chatbot actual
+     * @return id
+     */
+    public int getChatbotActual() {
+        return chatbotActual;
+    }
+
+    /**
+     * Cambia el id del chatbot actual
+     * @return nada
+     */
+    public void setChatbotActual(int chatbotActual) {
+        this.chatbotActual = chatbotActual;
+    }
+
+    /**
+     * Obtiene el id del flow actual
+     * @return id
+     */
+    public int getFlowActual() {
+        return flowActual;
+    }
+
+    /**
+     * Cambia el id del flow actual
+     * @return nada
+     */
+    public void setFlowActual(int flowActual) {
+        this.flowActual = flowActual;
+    }
+
+    /**
      * Obtiene cierto chatbot del sistema, según su id, para así imprimirlo en el menú
      * @param id id del chatbot a buscar
-     * @param sys sistema donde buscarlo
      * @return chatbot
      */
-    public Chatbot_21060190_CastilloPerez obtenerChatbot(int id, System_21060190_CastilloPerez sys){
+    public Chatbot_21060190_CastilloPerez obtenerChatbot(int id){
         //obtengo todos los chatbots del sistema
-        List<Chatbot_21060190_CastilloPerez> chatbots = sys.getChatbots();
+        List<Chatbot_21060190_CastilloPerez> chatbots = getChatbots();
         for(Chatbot_21060190_CastilloPerez i: chatbots){
             int idObtenido = i.getChatbotID();
             if(idObtenido == id){
@@ -189,13 +252,98 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
 
 
     /**
+     * Cambia el chatbot y flow actual del sistema
+     * @param idOptionEscogido int de la opción escogida para buscar el chatbot y flow actuales
+     */
+    public void setChatbotAndFlowActual(String idOptionEscogido) {
+        int idOption;
+        if(esNumero(idOptionEscogido)){
+            idOption = Integer.parseInt(idOptionEscogido);
+        }else{
+            idOption = obtenerIdOptionByKeyword(idOptionEscogido);
+        }
+        if(idOption != -1){
+            chatbotAnterior = getChatbotActual();
+            Chatbot_21060190_CastilloPerez chAux = obtenerChatbot(getChatbotActual());
+            flowAnterior = getFlowActual();
+            Flow_21060190_CastilloPerez flowAux = chAux.obtenerFlow(getFlowActual());
+            Option_21060190_CastilloPerez opAux = flowAux.obtenerOption(idOption);
+            setChatbotActual(opAux.getChatbotCodeLink());
+            setFlowActual(opAux.getInitialFlowCodeLink());
+        }
+    }
+
+    /**
+     * Obtiene la id del option que contiene a cierta keyword
+     * @param keyword keyword que se desea buscar
+     * @return devuelve la id si lo encuentra y un -1 si no existe
+     */
+    public int obtenerIdOptionByKeyword(String keyword){
+        chatbotAnterior = getChatbotActual();
+        Chatbot_21060190_CastilloPerez chAux = obtenerChatbot(getChatbotActual());
+        flowAnterior = getFlowActual();
+        Flow_21060190_CastilloPerez flowAux = chAux.obtenerFlow(getFlowActual());
+
+        for (Option_21060190_CastilloPerez option : flowAux.getOption()) {
+            for (String optionKeyword : option.getKeywords()) {
+                if (optionKeyword.equalsIgnoreCase(keyword)) {
+                    return option.getCode();
+                }else{
+                    return -1;
+                }
+            }
+        }return -1;
+    }
+
+
+    /**
      * Permite al usuario común interactuar con los chatbots
      * @param mensaje mensaje inicial, puede ser una id o keyword
      */
-    //mensaje puede ser int o string, si es int hay que pasarlo a int en la función
     public void systemTalk(String mensaje){
         if(esNumero(mensaje)){
-          //necesito chatbotcode link para igualarlo al id de algún chatbot
+            int idOption = Integer.parseInt(mensaje);
+            //chatbot inicial
+            if(idOption == getInitialChatbotCodeLink()){
+                Chatbot_21060190_CastilloPerez chatbotAux = obtenerChatbot(idOption);
+                setChatbotActual(chatbotAux.getChatbotID());
+                System.out.println(chatbotAux.getName());
+                chatHistory.append(chatbotAux.getName()).append("\n");
+                Flow_21060190_CastilloPerez flowAux = chatbotAux.obtenerFlow(chatbotAux.getStartFlowID());
+                setFlowActual(flowAux.getID());
+                System.out.println(flowAux.getNameMsg());
+                chatHistory.append(flowAux.getNameMsg()).append("\n");
+                System.out.println(chatbotAux.getWelcomeMessage());
+                chatHistory.append(chatbotAux.getWelcomeMessage()).append("\n");
+                //menú inicial
+                flowAux.printOptions(flowAux, chatHistory);
+            }else {
+                if(flowAnterior == flowActual && chatbotAnterior == chatbotActual) {
+                    System.out.println("No existen más opciones, por favor volver al menú del usuario ingresando 'no' a la consola");
+                }else {
+                    Chatbot_21060190_CastilloPerez chatbotAux = obtenerChatbot(getChatbotActual());
+                    System.out.println(chatbotAux.getName());
+                    chatHistory.append(chatbotAux.getName()).append("\n");
+                    Flow_21060190_CastilloPerez flowAux = chatbotAux.obtenerFlow(getFlowActual());
+                    System.out.println(flowAux.getNameMsg());
+                    chatHistory.append(flowAux.getNameMsg()).append("\n");
+                    flowAux.printOptions(flowAux, chatHistory);
+                    System.out.println("Ingrese la opcion que desea: ");
+                }
+            }
+        }else{
+            if(flowAnterior == flowActual && chatbotAnterior == chatbotActual) {
+                System.out.println("No existen más opciones, por favor volver al menú inicial ingresando 'no' a la consola");
+            }else {
+                Chatbot_21060190_CastilloPerez chatbotAux = obtenerChatbot(getChatbotActual());
+                System.out.println(chatbotAux.getName());
+                chatHistory.append(chatbotAux.getName()).append("\n");
+                Flow_21060190_CastilloPerez flowAux = chatbotAux.obtenerFlow(getFlowActual());
+                System.out.println(flowAux.getNameMsg());
+                chatHistory.append(flowAux.getNameMsg()).append("\n");
+                flowAux.printOptions(flowAux, chatHistory);
+                System.out.println("Ingrese la opcion que desea: ");
+            }
         }
     }
 
@@ -211,6 +359,7 @@ public class System_21060190_CastilloPerez implements SystemInterface_21060190_C
             }
         }return false;
     }
+
 
     @Override
     public String toString() {

@@ -4,65 +4,47 @@ import java.util.Locale;
 import java.util.List;
 
 public class User_21060190_CastilloPerez {
-
-    //distintos tipos de usuario
+    /**
+     * nombre del usuario
+     */
     private String userName;
+    /**
+     * true si es administrador, false si no
+     */
     private boolean esAdministrador;
 
-    //private List<User_21060190_CastilloPerez> listaUsuarios;
 
-    // Constructor
-
+    /**
+     * Constructor del usuario
+     * @param userName nombre del usuario
+     */
     public User_21060190_CastilloPerez(String userName) {
         this.userName = userName.toLowerCase();
         this.esAdministrador = false;
     }
 
 
-
-
-    /*public User_21060190_CastilloPerez(String userName) {
-        int verificador = verificarUsuarioUnico(userName);
-        if (verificador == 1){
-            this.userName = userName;
-            listaUsuarios.add(this);
-        }else{
-            System.out.println("El usuario ya existe en el sistema\n");
-        }
-        this.esAdministrador = false;
-    }
-
-    public int verificarUsuarioUnico (String usuario) {
-        boolean existeUser = false;
-        for (User_21060190_CastilloPerez usuarioExistente : listaUsuarios) {
-            String usuarioRegistrado = usuarioExistente.getUserName();
-            if (usuarioRegistrado.equals(usuario)) {
-                //caso de que si existe
-                existeUser = true;
-
-            }
-        } if (!existeUser) {
-            //caso de que no existe
-            return 1;
-        }
-        return 0;
-    }*/
-
-    // Métodos getters y setters
-
+    /**
+     * Obtiene el nombre del usuario
+     * @return nombre del usuario
+     */
     public String getUserName() {
         return userName;
     }
 
-    public void setNombre(String nombre) {
-        this.userName = nombre;
-    }
 
-
+    /**
+     * Obtiene el valor de esAdministrador
+     * @return true o false
+     */
     public boolean isEsAdministrador() {
         return esAdministrador;
     }
 
+    /**
+     * Cambia el valor del esAdministrador
+     * @param esAdministrador puede ser true o false
+     */
     public void setEsAdministrador(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
     }

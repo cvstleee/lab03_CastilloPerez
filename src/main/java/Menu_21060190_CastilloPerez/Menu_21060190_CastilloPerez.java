@@ -18,13 +18,14 @@ public class Menu_21060190_CastilloPerez {
         bienvenida();
 
         //system con datos
-        System_21060190_CastilloPerez s2 = CargaDatos.cargaDatos();
+        System_21060190_CastilloPerez system = CargaDatos.cargaDatos();
         //opción de salida
         int MENU_EXIT_OPTION = 4;
 
         //guardar opciones
         int opcion1;
         int opcion2;
+        int opcion7;
         int opcion3;
         int opcion4;
         int opcion5;
@@ -76,11 +77,10 @@ public class Menu_21060190_CastilloPerez {
                     System.out.println("Ingrese el nombre del usuario que desea iniciar sesión: ");
                     input.nextLine();
                     usuarioNuevo = input.nextLine();
-                    //verificar aquí si existe el usuario
                     usuarioNuevo2 = usuarioNuevo.toLowerCase();
                     //obtengo el tipo de usuario
-                    tipo = s2.systemLogin(usuarioNuevo2);
-                    userLogueado = s2.getUserlog();
+                    tipo = system.systemLogin(usuarioNuevo2);
+                    userLogueado = system.getUserlog();
 
                     //si se logró loguear un usuario
                     if(!(userLogueado.equals(""))){
@@ -118,8 +118,8 @@ public class Menu_21060190_CastilloPerez {
 
                                                 case 2:
                                                     System.out.println("En esta opcion se agrega el chatbot 1 anteriormente creado al sistema con datos prehechos\n");
-                                                    s2.systemAddChatbot(c4);
-                                                    System.out.println("Sistema actual + el chatbot creado recientemente: " + s2);
+                                                    system.systemAddChatbot(c4);
+                                                    System.out.println("Sistema actual + el chatbot creado recientemente: " + system);
                                                     break;
 
                                                 case 3:
@@ -143,14 +143,14 @@ public class Menu_21060190_CastilloPerez {
 
                                                 case 4:
                                                     System.out.println("En esta opcion se agrega el chatbot 2 anteriormente creado al sistema con datos prehechos\n");
-                                                    s2.systemAddChatbot(c5);
-                                                    System.out.println("Sistema actual + el chatbot creado recientemente: " + s2);
+                                                    system.systemAddChatbot(c5);
+                                                    System.out.println("Sistema actual + el chatbot creado recientemente: " + system);
                                                     break;
                                             }
-                                        }while (opcion4 != 5); //con esto vuelve al inicial
-
+                                        }while (opcion4 != 5);
+                                    break;
                                     case 2:
-                                        //flows, otro menú
+                                        //flows
                                         do{
                                             menuFlow();
                                             opcion5 = input.nextInt();
@@ -208,7 +208,7 @@ public class Menu_21060190_CastilloPerez {
 
 
                                     case 3:
-                                        //options, otro menú
+                                        //options
                                         do{
                                             menuOption();
                                             opcion6 = input.nextInt();
@@ -298,36 +298,79 @@ public class Menu_21060190_CastilloPerez {
                                                     break;
                                             }
                                         }while(opcion6 != 7);
+
+
+                                    case 4:
+                                        system.systemTalk("0");
+                                        input.nextLine();
+                                        while (true) {
+                                            System.out.println("Escriba el n° de la opción que desea o uno de sus keywords: ");
+                                            idOP = input.nextLine();
+                                            system.getChatHistory().append("Eligió la opción: ").append(idOP).append("\n").append("\n");
+
+                                            if(system.obtenerIdOptionByKeyword(idOP) != -1 || system.esNumero(idOP)){
+                                                system.setChatbotAndFlowActual(idOP);
+                                                system.systemTalk(idOP);
+                                                System.out.println("¿Desea continuar? (si/no): ");
+                                                String continuar = input.nextLine();
+
+                                                if (!continuar.equalsIgnoreCase("si")) {
+                                                    system.getChatHistory().append("El usuario salió del menú de interacciones\n");
+                                                    break;
+                                                }
+                                            }else{
+                                                System.out.println("No existen ocurrencias de esa keyword, por favor intente otra vez\n");
+                                            }
+                                        }
+                                        break;
+
+                                    case 5:
+                                        System.out.printf("El/la usuario %s tuvo las siguientes interacciones: \n\n", system.getUserLog());
+                                        System.out.println(system.getChatHistory());
+                                        break;
                                 }
-                            }while (opcion3 != MENU_EXIT_OPTION);
+                            }while (opcion3 != 6);
                         }
                         if(!tipo){
-                            Chatbot_21060190_CastilloPerez chatbotAux = s2.obtenerChatbot(0,s2);
-                            System.out.println(chatbotAux.getName());
-                            System.out.println(chatbotAux.getWelcomeMessage());
-                            Flow_21060190_CastilloPerez flowAux = chatbotAux.obtenerFlow(chatbotAux.getStartFlowID(), chatbotAux);
-                            System.out.println(flowAux.getNameMsg());
-                            //menú inicial
-                            flowAux.printOptions(flowAux);
-                            System.out.println("Escriba el n° de la opción que desea: ");
-                            input.nextLine();
-                            idOP = input.nextLine();
+                            do{
+                                menuComun();
+                                opcion7 = input.nextInt();
+                                switch(opcion7){
+                                    case 1:
+                                        system.systemTalk("0");
+                                        input.nextLine();
+                                        // Ciclo principal
+                                        while (true) {
+                                            System.out.println("Escriba el n° de la opción que desea o uno de sus keywords: ");
+                                            idOP = input.nextLine();
+                                            system.getChatHistory().append("Eligió la opción: ").append(idOP).append("\n").append("\n");
 
-                            s2.systemTalk(idOP);
+                                            if(system.obtenerIdOptionByKeyword(idOP) != -1 || system.esNumero(idOP)){
+                                                system.setChatbotAndFlowActual(idOP);
+                                                system.systemTalk(idOP);
+                                                System.out.println("¿Desea continuar? (si/no): ");
+                                                String continuar = input.nextLine();
 
-                            /**
-                             * Login/Logout
-                             * Interactuar con el chatbot (system-talk)
-                             * Consultar por la síntesis de un chatbot que le pertenece (system-synthesis)
-                             * Simular el diálogo entre dos chatbots del sistema (system-simulate)
-                             * */
+                                                if (!continuar.equalsIgnoreCase("si")) {
+                                                    system.getChatHistory().append("El usuario salió del menú de interacciones\n");
+                                                    break;
+                                                }
+                                            }else{
+                                                System.out.println("No existen ocurrencias de esa keyword, por favor intente otra vez\n");
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+                                        System.out.printf("El/la usuario %s tuvo las siguientes interacciones: \n\n", system.getUserLog());
+                                        System.out.println(system.getChatHistory());
+                                        break;
+                                }
+                            }while (opcion7 != 3);
                         }
-
                     }else{
                         System.out.printf("El usuario %s no esta registrado en el sistema, intentelo nuevamente\n",usuarioNuevo);
                     }
-
-
+                break;
                 case 2:
                     do {
                         menuTipoUsuario();
@@ -339,7 +382,7 @@ public class Menu_21060190_CastilloPerez {
                                 usuarioNuevo = input.nextLine();
                                 User_21060190_CastilloPerez usuarioObj = new User_21060190_CastilloPerez(usuarioNuevo);
                                 usuarioObj.setEsAdministrador(false);
-                                boolean seAgregoUser = s2.systemAddUser(usuarioObj);
+                                boolean seAgregoUser = system.systemAddUser(usuarioObj);
                                 if(!seAgregoUser){
                                     System.out.printf("Se agrego al usuario %s con exito\n", usuarioObj);
                                 }else{
@@ -353,11 +396,9 @@ public class Menu_21060190_CastilloPerez {
                                 input.nextLine();
                                 usuarioNuevo = input.nextLine();
                                 usuarioNuevo2 = usuarioNuevo.toLowerCase();
-                                //creo el objeto usuario1
                                 User_21060190_CastilloPerez usuarioObj2 = new User_21060190_CastilloPerez(usuarioNuevo2);
                                 usuarioObj2.setEsAdministrador(true);
-                                //lo agrego al sistema
-                                boolean seAgregoUser2 = s2.systemAddUser(usuarioObj2);
+                                boolean seAgregoUser2 = system.systemAddUser(usuarioObj2);
                                 if(!seAgregoUser2){
                                     System.out.printf("Se agrego al usuario %s con exito\n", usuarioObj2);
                                 }else{
@@ -371,15 +412,16 @@ public class Menu_21060190_CastilloPerez {
                             default:
                                 System.out.println("Ingrese una opción válida");
                         }
-                    }while (opcion2 != 3);
+                    }while (opcion2 != 4);
+                    break;
                 case 3:
-                    s2.systemLogout();
-                    if (s2.getUserLog().equals("")){
+                    system.systemLogout();
+                    if (system.getUserLog().equals("")){
                         System.out.println("Ha cerrado sesión exitosamente");
                     }
                     break;
-                }break;
-           } while (opcion1 != MENU_EXIT_OPTION);
+                }
+        } while (opcion1 != MENU_EXIT_OPTION);
     }
 
     private void printMenu() {
@@ -404,7 +446,9 @@ public class Menu_21060190_CastilloPerez {
         System.out.println("1. Chatbot");
         System.out.println("2. Flow");
         System.out.println("3. Option");
-        System.out.println("4. Volver al menú inicial");
+        System.out.println("4. Interactuar con los chatbots existentes");
+        System.out.println("5. Historial de lo realizado");
+        System.out.println("6. Volver al menú inicial");
         System.out.println("\nEscoja qué acción a realizar: ");
     }
 
@@ -438,6 +482,14 @@ public class Menu_21060190_CastilloPerez {
         System.out.println("5. Agregar option 2 a flow 1");
         System.out.println("6. Agregar option 2 a flow 2");
         System.out.println("7. Volver al menú de acciones");
+        System.out.println("\nEscoja qué acción a realizar: ");
+    }
+
+    private void menuComun(){
+        System.out.println("Menu usuario común\n");
+        System.out.println("1. Interactuar con chatbots");
+        System.out.println("2. Historial de lo realizado");
+        System.out.println("3. Volver al menú inicial");
         System.out.println("\nEscoja qué acción a realizar: ");
     }
 

@@ -120,12 +120,11 @@ public class Chatbot_21060190_CastilloPerez implements ChatbotInterface_21060190
     /**
      * Obtiene el flow de cierto chatbot que coincida con una ID
      * @param id Id del flow que se desea obtener del chatbot
-     * @param chatbot chatbot que tiene flows
-     * @return flow
+     * @return flow o null en caso de no existir
      */
-    public Flow_21060190_CastilloPerez obtenerFlow(int id, Chatbot_21060190_CastilloPerez chatbot){
+    public Flow_21060190_CastilloPerez obtenerFlow(int id){
         //obtengo todos los flows de ese chatbot en la 2da entrada
-        List<Flow_21060190_CastilloPerez> flowsChatbot = chatbot.getFlows();
+        List<Flow_21060190_CastilloPerez> flowsChatbot = getFlows();
         for(Flow_21060190_CastilloPerez i: flowsChatbot){
             int idObtenido = i.getID();
             if(idObtenido == id){
@@ -144,7 +143,7 @@ public class Chatbot_21060190_CastilloPerez implements ChatbotInterface_21060190
         boolean existeID = false;
 
         for (Flow_21060190_CastilloPerez i : flows) {
-            int code2 = i.getID(); // Código de los options ya agregados
+            int code2 = i.getID();
             if (code == code2) {
                 existeID = true;
                 //System.out.println("Ya existe ese option");

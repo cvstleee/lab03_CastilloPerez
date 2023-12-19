@@ -18,18 +18,20 @@ public class CargaDatos {
 
         //PROBAR QUE ESTE SOLO AGREGUE UNA OCURRIENCIA
         ArrayList<Option_21060190_CastilloPerez> optionList = new ArrayList<Option_21060190_CastilloPerez>(Arrays.asList(op1, op2));
-        Flow_21060190_CastilloPerez f1 = new Flow_21060190_CastilloPerez(1, "Flujo Principal Chatbot 1\n", optionList);
+        Flow_21060190_CastilloPerez f1 = new Flow_21060190_CastilloPerez(1, "Flujo Principal Chatbot inicial", optionList);
         ArrayList<Flow_21060190_CastilloPerez> flowList = new ArrayList<Flow_21060190_CastilloPerez>(Arrays.asList(f1));
         Chatbot_21060190_CastilloPerez cb0 = new Chatbot_21060190_CastilloPerez(0, "Chatbot inicial", "¿Qué te gustaría hacer?", 1, flowList);
 
        //----CHATBOT SIGUIENTES SEGÚN OP1 Y OP2
         Option_21060190_CastilloPerez op3 = new Option_21060190_CastilloPerez(1, "1) New York, USA", 1, 2, Arrays.asList("USA", "Estados Unidos", "New York"));
         Option_21060190_CastilloPerez op4 = new Option_21060190_CastilloPerez(2, "2) París, Francia", 1, 1, Arrays.asList("Paris", "Eiffel"));
+        //esta opcion no tiene mas chatbots
         Option_21060190_CastilloPerez op5 = new Option_21060190_CastilloPerez(3, "3) Torres del Paine, Chile", 1, 1, Arrays.asList("Chile", "Torres", "Paine", "Torres Paine", "Torres del Paine"));
         Option_21060190_CastilloPerez op6 = new Option_21060190_CastilloPerez(4, "4) Volver", 0, 1, Arrays.asList("Regresar", "Salir", "Volver"));
 
+        //chatbot opción usa
         Option_21060190_CastilloPerez op7 = new Option_21060190_CastilloPerez(1, "1) Central Park", 1, 2, Arrays.asList("Central", "Park", "Central Park"));
-        Option_21060190_CastilloPerez op8 = new Option_21060190_CastilloPerez(2, "2) París, Francia", 1, 1, Arrays.asList("Museo", "Antiguedades"));
+        Option_21060190_CastilloPerez op8 = new Option_21060190_CastilloPerez(2, "2) Museo Americano", 1, 1, Arrays.asList("Museo", "Antiguedades"));
         Option_21060190_CastilloPerez op9 = new Option_21060190_CastilloPerez(3, "3) Ningún otro atractivo", 1, 3, Arrays.asList("Ninguno"));
         Option_21060190_CastilloPerez op10 = new Option_21060190_CastilloPerez(4, "4) Cambiar destino", 1, 1, Arrays.asList("Cambiar", "Volver", "Salir"));
 
@@ -40,9 +42,9 @@ public class CargaDatos {
         Option_21060190_CastilloPerez op15 = new Option_21060190_CastilloPerez(5, "5) En realidad quiero otro destino", 1, 1, Arrays.asList("Cambiar destino"));
 
         ArrayList<Option_21060190_CastilloPerez> optionList1 = new ArrayList<Option_21060190_CastilloPerez>(Arrays.asList(op3, op4, op5, op6));
-        Flow_21060190_CastilloPerez f20 = new Flow_21060190_CastilloPerez(1, "Flujo 1 Chatbot1\n¿Dónde te Gustaría ir?", optionList1);
+        Flow_21060190_CastilloPerez f20 = new Flow_21060190_CastilloPerez(1, "Flujo 1 Chatbot 1\n¿Dónde te Gustaría ir?", optionList1);
         ArrayList<Option_21060190_CastilloPerez> optionList2 = new ArrayList<Option_21060190_CastilloPerez>(Arrays.asList(op7, op8, op9, op10));
-        Flow_21060190_CastilloPerez f21 = new Flow_21060190_CastilloPerez(2, "Flujo 2 Chatbot1\n¿Qué atractivos te gustaría visitar?", optionList2);
+        Flow_21060190_CastilloPerez f21 = new Flow_21060190_CastilloPerez(2, "Flujo 2 Chatbot 1\n¿Qué atractivos te gustaría visitar?", optionList2);
         ArrayList<Option_21060190_CastilloPerez> optionList3 = new ArrayList<Option_21060190_CastilloPerez>(Arrays.asList(op11, op12, op13, op14, op15));
         Flow_21060190_CastilloPerez f22 = new Flow_21060190_CastilloPerez(3, "Flujo 3 Chatbot1\n¿Vas solo o acompañado?", optionList3);
         ArrayList<Flow_21060190_CastilloPerez> flowList1 = new ArrayList<Flow_21060190_CastilloPerez>(Arrays.asList(f20, f21, f22));
@@ -51,7 +53,7 @@ public class CargaDatos {
         Option_21060190_CastilloPerez op17 = new Option_21060190_CastilloPerez(2, "2) Postgrado", 2, 1, Arrays.asList("Doctorado", "Magister", "Postgrado"));
         Option_21060190_CastilloPerez op18 = new Option_21060190_CastilloPerez(3, "3) Volver", 0, 1, Arrays.asList("Volver", "Salir", "Regresar"));
         ArrayList<Option_21060190_CastilloPerez> optionList4 = new ArrayList<Option_21060190_CastilloPerez>(Arrays.asList(op16, op17, op18));
-        Flow_21060190_CastilloPerez f3 = new Flow_21060190_CastilloPerez(1, "Flujo 1 Chatbot2\n¿Qué te gustaría estudiar?", optionList4);
+        Flow_21060190_CastilloPerez f3 = new Flow_21060190_CastilloPerez(1, "Flujo 1 Chatbot 2\n¿Qué te gustaría estudiar?", optionList4);
         ArrayList<Flow_21060190_CastilloPerez> flowList2 = new ArrayList<Flow_21060190_CastilloPerez>(Arrays.asList(f3));
         Chatbot_21060190_CastilloPerez cb2 = new Chatbot_21060190_CastilloPerez(2, "Orientador Académico", "Bienvenido\n¿Qué te gustaría estudiar?", 1, flowList2);
         ArrayList<Chatbot_21060190_CastilloPerez> chatbots = new ArrayList<>(Arrays.asList(cb0, cb1, cb2));
@@ -65,15 +67,6 @@ public class CargaDatos {
         system.systemAddUser(user1);
         system.systemAddUser(user2);
         system.systemAddUser(user3);
-        /*system.systemLogin("user2");
-        system.systemTalk("hola");
-        system.systemTalk("1");
-        system.systemTalk("1");
-        system.systemTalk("Museo");
-        system.systemTalk("1");
-        system.systemTalk("3");
-        system.systemTalk("5");
-        system.systemLogout();*/
         return system;
     }
 }

@@ -1,7 +1,7 @@
 package Option_21060190_CastilloPerez;
 import java.util.List;
 
-public class Option_21060190_CastilloPerez {
+public class Option_21060190_CastilloPerez implements OptionInterface_21060190_CastilloPerez {
     /**
      * código de un option
      */
@@ -72,6 +72,14 @@ public class Option_21060190_CastilloPerez {
     }
 
     /**
+     * Obtiene la lista de keywords de un option
+     * @return lista de keywords
+     */
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    /**
      * Cambia el código del option
      * @param code
      */
@@ -105,14 +113,6 @@ public class Option_21060190_CastilloPerez {
         this.initialFlowCodeLink = initialFlowCodeLink;
     }
 
-    /**
-     * Cambia la lista de keywords del option
-     * @param keywords
-     */
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
-
 
     /**
      * Agrega un keyword a la lista de keywords de cierto option
@@ -121,6 +121,7 @@ public class Option_21060190_CastilloPerez {
     public void agregarKeyword(String keyword){
         this.keywords.add(keyword);
     }
+
     @Override
     public String toString() {
         return "Option_21060190_CastilloPerez{" +

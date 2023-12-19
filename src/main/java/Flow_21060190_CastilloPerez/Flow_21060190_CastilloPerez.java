@@ -1,6 +1,7 @@
 package Flow_21060190_CastilloPerez;
 import java.util.List;
 import Option_21060190_CastilloPerez.Option_21060190_CastilloPerez;
+import System_21060190_CastilloPerez.System_21060190_CastilloPerez;
 
 
 public class Flow_21060190_CastilloPerez implements FlowInterface_21060190_CastilloPerez {
@@ -94,10 +95,26 @@ public class Flow_21060190_CastilloPerez implements FlowInterface_21060190_Casti
      * Imprime los options de cierto flow
      * @param flow flow del que se quieren imprimir los options
      */
-    public void printOptions(Flow_21060190_CastilloPerez flow) {
+    public void printOptions(Flow_21060190_CastilloPerez flow, StringBuilder chatHistory) {
         for (Option_21060190_CastilloPerez opt : flow.getOption()) {
-            System.out.println(opt.getMessage());
+            System.out.println(opt.getMessage() + ", keywords:" + opt.getKeywords());
+            chatHistory.append(opt.getMessage()).append(", keywords:").append(opt.getKeywords()).append("\n");
         }
+    }
+
+    /**
+     * Obtiene un option de cierto flow
+     * @param code codigo del option
+     * @return Option
+     */
+    public Option_21060190_CastilloPerez obtenerOption(int code){
+        List<Option_21060190_CastilloPerez> optionsFlow = getOption();
+        for(Option_21060190_CastilloPerez i: optionsFlow){
+            int idObtenido = i.getCode();
+            if(idObtenido == code){
+                return i;
+            }
+        }return null;
     }
     @Override
     public String toString() {
