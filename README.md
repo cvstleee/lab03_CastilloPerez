@@ -1,3 +1,3 @@
 # lab03_CastilloPerez
 
-- me quedé en rf11 y avance del menú
+Proyecto en JAVA de la simulación de chatbots para el curso de Paradigmas de Programación.
